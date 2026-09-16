@@ -1,0 +1,50 @@
+# CODEOWNERS — SuperPet
+#
+# 含义：谁的 AI 在改这个目录，谁负责 review 与验收。
+# 详见 docs/团队分工.md
+#
+# ⚠️ 待替换：下面的 @person-a / @person-b / @person-c 是占位符，
+#    请换成三位成员真实的 GitHub 用户名。CODEOWNERS 只认 GitHub 用户名或团队名，
+#    占位符不会报错，但也不会生效。
+#
+# 三条纵切：
+#   人A（person-a） 桌宠本体线：运行时渲染 + 桌面外壳 + 本地 IPC
+#   人B（person-b） 工坊生成线：工坊 UI + PetPack 契约 + 生成流水线
+#   人C（person-c） 平台交易线：计价账户订单 + AI 网关
+
+# ---------- 人A：桌宠本体线 ----------
+/apps/desktop/src/main/           @person-a
+/apps/desktop/src/preload/        @person-a
+/packages/pet-runtime/            @person-a
+/packages/ipc-client/             @person-a
+/policies/                        @person-a
+
+# ---------- 人B：工坊生成线 ----------
+/packages/workshop-ui/            @person-b
+/packages/petpack-schema/         @person-b
+/apps/desktop/src/renderer/       @person-b
+/DESIGN.md                        @person-b
+
+# ---------- 人C：平台交易线 ----------
+/services/api/                    @person-c
+/services/ai-gateway/             @person-c
+/packages/pricing-sdk/            @person-c
+
+# ---------- 阶段二/三：技能执行与协议 ----------
+# 阶段二起由轮换后的 owner 接手，见 docs/团队分工.md §5
+/crates/                          @person-a
+/packages/skill-protocol/         @person-a
+/plugins/                         @person-a
+
+# ---------- 共享基建：只归人A，避免三人同时改根配置 ----------
+/package.json                     @person-a
+/pnpm-workspace.yaml              @person-a
+/.github/                         @person-a
+/AGENTS.md                        @person-a
+/tsconfig*.json                   @person-a
+
+# ---------- 文档：改动需跨线 review ----------
+/docs/                            @person-a @person-b @person-c
+
+# 兜底：未匹配的文件由人A 负责
+*                                 @person-a
